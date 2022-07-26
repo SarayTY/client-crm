@@ -1,0 +1,111 @@
+<app-page-header
+  title="customers"
+  icon="bi bi-person-lines-fill"
+  description="Customers List"
+></app-page-header>
+
+<div class="row mt-9 p-3">
+
+  <div class="row col-3">
+    <input
+      [(ngModel)]="firstNameSearch"
+      name="firstName-term"
+      type="text"
+      class="form-control"
+      placeholder="Search customer by first name..."
+    />
+  </div>
+
+  <div class="col-3">
+    <input
+      [(ngModel)]="lastNameSearch"
+      name="lastName-term"
+      type="text"
+      class="form-control"
+      placeholder="Search customer by last name..."
+    />
+  </div>
+  
+  <div class="col-3">
+    <input
+      [(ngModel)]="phoneSearch"
+      name="phone-term"
+      type="text"
+      class="form-control"
+      placeholder="Search customer by phone number..."
+   
+    />
+  </div>
+
+  <div class="col-3">
+    <a routerLink="./new" class="btn-add btn text-light">
+      <i class="bi bi-person-plus-fill"></i>
+      <b>Add New Customer</b>
+    </a>
+  </div>
+</div> 
+
+<div class="row mt-3">
+  <div class="col-12">
+   <!-- Search filter-->
+    <div *ngIf="
+        customer$ | async 
+        | filterCustomer: 'firstName': firstNameSearch 
+        | filterCustomer: 'lastName': lastNameSearch
+        | filterCustomer: 'phone': phoneSearch as customers; else loading">
+
+      <table
+        *ngIf="customers.length; else noCustomers"
+        class="table table-bordered"
+      >
+        <thead>
+          <tr>
+            <th>#No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers; index as idx">
+            <td>
+              {{ idx + 1 }}.
+
+              <a [routerLink]="['./', customer.id, 'edit']">
+                <i class="bi bi-pencil-fill"></i>
+              </a>
+
+              <a class="ms-3" (click)="remove(customer.id)">
+                <i class="bi bi-trash-fill"></i>
+              </a>
+            </td>
+            <td>
+              <a [routerLink]="['./', customer.id]">
+                {{ customer.firstName }}
+              </a>
+            </td>
+            <td>
+              {{ customer.lastName }}
+            </td>
+            <td>
+              <a [href]="'mailto:' + customer.email">
+                {{ customer.email }}
+              </a>
+            </td>
+            <td>
+              <a [href]="'tel:' + customer.phone">
+                {{ customer.phone }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading> loading... </ng-template>
+<ng-template #noCustomers>
+  <p><i>No customers...</i></p>
+</ng-template>

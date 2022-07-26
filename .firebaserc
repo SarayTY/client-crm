@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "saray-crm-project-2021": {
+      "hosting": {
+        "crm-client": [
+          "saray-crm-project-2021"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "saray-crm-project-2021"
+  }
+}

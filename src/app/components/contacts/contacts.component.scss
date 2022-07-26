@@ -1,0 +1,34 @@
+.title-page{
+    text-align: center;
+    text-decoration: underline;
+}
+.table{
+   border: 1px solid black;
+}
+
+
+.styled-table {
+    font-size: 1em;
+    font-family:system-ui;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color:rgb(233, 131, 148);
+    color: #ffffff;
+    text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
